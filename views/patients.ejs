@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>Happy Health Hospital Management </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"> 
+    <header>
+      <nav>
+        <div class="nav-brand">
+          <a>Happy Hospital Management</a>
+        </div> </br>
+        <ul class="nav-links">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/patients">Patients</a></li>
+          <li><a href="/doctors/doctor">Doctors</a></li>
+          <li> <a href="/patients/appointments"> Appointments</a> </li>
+          <li><a href="/doctors/prescriptions">Prescriptions</a></li>
+          <li><a href="/patients/admissions">Admission</a></li>
+          <li><a href="/patients/tests">Tests</a></li>
+        </ul> 
+        <ul>
+          <a href="/logout" class="btn btn-primary">Logout</a>
+        </ul>
+      </nav>
+    </header>
+    <style>
+        .table thead th {
+  border: none;
+  font-weight: bold;
+  color: #fff;
+  background-color: #343a40;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: left;
+  color: #333;
+  margin: 20px 0;
+}
+    </style>
+  </head>
+
+<body style="background-image:url('/images/35.jpg')">
+  <div>
+    <% if (typeof removedUser !== 'undefined' && removedUser) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          User has been removed.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+        
+<div class="row">
+    <div class="col-6">
+      <h1>Patients List </h1>
+      <form class="d-flex" method="POST" action="/patients" novalidate>
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <a href="/patients/addpatient" type="button" class="btn btn-primary align-self-center">+ add patients</a>
+    </div>
+  </div>
+  
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col" class="text-end">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+  
+        <% for(var i = 0; i < rows.length; i++) { %>
+      <tr>
+        <th scope="row"><%= rows[i].patient_id %></th>
+        <td><%= rows[i].first_name %></td>
+        <td><%= rows[i].last_name %></td>
+        <td><%= rows[i].age %></td>
+        <td><%= rows[i].gender %></td>
+        <td><%= rows[i].email %></td>
+        <td><%= rows[i].phone %></td>
+        <td class="text-end">
+          <a href="/patients/viewpatient/<%= rows[i].patient_id%>" type="button" class="btn btn-secondary btn-small"><i class="bi bi-eye"></i> View Details</a>
+          <a href="/patients/editpatient/<%= rows[i].patient_id%>" type="button" class="btn btn-secondary btn-small"><i class="bi bi-pencil"></i>Edit Details</a>
+          <a href="/patients/delete/<%= rows[i].patient_id%>" type="button" class="btn btn-secondary btn-small"><i class="bi bi-person-x"></i> Delete Patient</a>
+        </td>
+      </tr>
+      <% } %>
+  
+    </tbody>
+  </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+  crossorigin="anonymous"></script>
+</body>
+
+  </html>
+  
